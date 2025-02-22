@@ -67,17 +67,17 @@
 
         <!-- Countdown Timer -->
         <h2>Countdown to 5 PM Today:</h2>
-        <p id="countdown"></p>
+        <p id="countdown">Loading...</p>
     </div>
 
     <script>
         function openPhoto() {
-            window.open('https://raw.githubusercontent.com/Anig164/Aadrika-Birthday/main/WhatsApp%20Image%202025-02-22%20at%2007.58.21.jpeg', '_blank');
+            window.open('https://raw.githubusercontent.com/your-username/your-repository/main/image-name.jpg', '_blank');
         }
 
         function startCountdown() {
             let countdownElement = document.getElementById("countdown");
-            
+
             function updateTimer() {
                 let now = new Date();
                 let targetTime = new Date();
@@ -95,9 +95,9 @@
                     return;
                 }
 
-                let hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
-                let minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
-                let seconds = Math.floor((timeLeft / 1000) % 60);
+                let hours = Math.floor(timeLeft / (1000 * 60 * 60));
+                let minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                let seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
                 countdownElement.innerHTML = `${hours}h ${minutes}m ${seconds}s left`;
             }
@@ -107,7 +107,7 @@
             setInterval(updateTimer, 1000);
         }
 
-        window.onload = startCountdown;
+        document.addEventListener("DOMContentLoaded", startCountdown);
     </script>
 </body>
 </html>
