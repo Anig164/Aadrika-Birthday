@@ -19,10 +19,6 @@
             transform-style: preserve-3d;
             animation: float 6s infinite ease-in-out alternate;
         }
-        @keyframes float {
-            0% { transform: rotateY(-10deg) rotateX(-10deg); }
-            100% { transform: rotateY(10deg) rotateX(10deg); }
-        }
         h1 {
             font-size: 60px;
             color: #ff3399;
@@ -39,10 +35,6 @@
             margin-top: 20px;
             animation: fadeIn 3s ease-in-out;
         }
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
         .button {
             margin-top: 20px;
             padding: 15px 30px;
@@ -57,18 +49,65 @@
         .button:hover {
             background-color: #cc0066;
         }
+        /* Countdown Timer Styling */
+        #countdown {
+            font-size: 30px;
+            color: #ff0000;
+            margin-top: 20px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>🎉 Happy 10th Birthday Aadi ! 🎂</h1>
         <p class="message">Wishing you a day filled with fun, laughter, and lots of cake! 🎈🎁</p>
+        
         <button class="button" onclick="openPhoto()">Click to See a Surprise! 🎁</button>
+
+        <!-- Countdown Timer -->
+        <h2>Countdown to 5 PM Today:</h2>
+        <p id="countdown"></p>
     </div>
+
     <script>
         function openPhoto() {
-            window.open('https://github.com/Anig164/Aadrika-Birthday/blob/main/WhatsApp%20Image%202025-02-22%20at%2007.58.21.jpeg?raw=true', '_blank');
+            window.open('https://raw.githubusercontent.com/your-username/your-repo/main/image.png', '_blank');
         }
+
+        function startCountdown() {
+            let countdownElement = document.getElementById("countdown");
+            
+            function updateTimer() {
+                let now = new Date();
+                let targetTime = new Date();
+                targetTime.setHours(17, 0, 0, 0); // 5 PM today
+
+                // If it's already past 5 PM, set the countdown for tomorrow
+                if (now > targetTime) {
+                    targetTime.setDate(targetTime.getDate() + 1);
+                }
+
+                let timeLeft = targetTime - now;
+
+                if (timeLeft <= 0) {
+                    countdownElement.innerHTML = "🎉 It's Time! 🎉";
+                    return;
+                }
+
+                let hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
+                let minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
+                let seconds = Math.floor((timeLeft / 1000) % 60);
+
+                countdownElement.innerHTML = `${hours}h ${minutes}m ${seconds}s left`;
+            }
+
+            // Update the timer every second
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        }
+
+        window.onload = startCountdown;
     </script>
 </body>
 </html>
